@@ -9,4 +9,5 @@ import java.util.List;
 public interface StackRepository extends JpaRepository<MyStack, Long> {
 
     List<MyStack> findByUserIdAndLevel(Long id, String level);
+    List<MyStack> findByUserId(Long id);
 }
