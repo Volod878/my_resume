@@ -6,6 +6,7 @@
 > + Spring Boot 2, Data, Security
 > + MySQL, Liquibase
 > + HTML
+> + JUnit Jupiter
 > + Maven
 
 ### Maven

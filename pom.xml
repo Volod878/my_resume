@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.volod878</groupId>
     <artifactId>my_resume</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>my_resume</name>
     <description>my_resume</description>
     <properties>
