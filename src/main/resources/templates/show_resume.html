@@ -15,11 +15,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <h2>Мое резюме</h2>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <form sec:authorize="isAuthenticated()" class="form-inline m-2 my-2 my-lg-0">
+        <a th:href="'/editor/' + ${user.id}" class="btn btn-outline-primary">Редактировать</a>
+    </form>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -34,31 +32,13 @@
     </div>
 </nav>
 
-<div class="container" sec:authorize="isAuthenticated()">
+<div class="container">
     <br>
     <div class="blog-post">
         <h3 class="blog-post-title">Добрый день! Меня зовут</h3>
-        <h3 th:text="${realName}">Владимир</h3>
+        <h3 th:text="${user.realName}">Владимир</h3>
         <br>
-        <p>Изучал Java на JavaRush. <a href="https://javarush.ru/users/2317229">Мой профиль</a></p>
-        <p><a href="https://github.com/Volod878?tab=repositories">Мой GitHub репозиторий</a></p>
-        <br>
-        <h4>Мои проекты</h4>
-        <ul>
-            <li>
-                <a href="https://t.me/Volod878_bot">Телеграм-бот</a>
-                <p>Бот может подписаться на <a href="https://javarush.ru/groups/all">статьи</a>
-                    сообщества JavaRush.
-                    После этого все новые статьи будут приходить в телеграм. Исходный код на Телеграм-бота на
-                    <a href="https://github.com/Volod878/volod_telegrambot">GitHub</a></p>
-            </li>
-            <li>
-                <p>Конструктор модульных зданий <br>
-                    Проект в стадии разработки: Программа для автоматизированного расчета модульных зданий.
-                    Данная программа должна из заданных параметров определять все необходимые материалы для
-                    производства и общую стоимость по текущим расценкам</p>
-            </li>
-        </ul>
+        <div th:utext="${user.fullText}">Изучал Java</div>
         <br>
         <h4>Технический стек</h4>
         <ul th:each="levelHigh : ${allLevelHigh}">

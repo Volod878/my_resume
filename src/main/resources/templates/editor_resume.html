@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <title>Редактор резюме</title>
+</head>
+<body sec:authorize="isAuthenticated()">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h2>Редактор резюме</h2>
+
+    <form class="form-inline m-2 my-2 my-lg-0" th:action="@{/}" method="get">
+        <button class="btn btn-outline-primary my-2 my-sm-0">Назад</button>
+    </form>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0">Выйти</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <br>
+    <div class="blog-post">
+        <h3 class="blog-post-title">Добрый день! Меня зовут</h3>
+
+        <div>
+            <form th:action="'/editor/' + ${user.id}" th:method="put">
+                <label>
+                    <input type="text" th:value="${user.realName}" name="realName"
+                           placeholder="Введите настоящее имя" class="form-control"
+                           aria-describedby="basic-addon2">
+                </label><br>
+                <textarea placeholder="Введите полный текст резюме" class="form-control"
+                          th:text="${user.fullText}" name="fullText"></textarea>
+                <br>
+                <button type="submit" class="btn btn-success">Сохранить</button>
+                <br><br>
+            </form>
+        </div>
+
+        <h4>Технический стек</h4>
+        <div>
+            <form class="form-inline" th:action="'/editor/' + ${user.id} + '/stack'" th:method="post">
+                <input type="text"  th:value="${nameStack}" name="nameStack" class="form-select-button m-3"
+                       placeholder="Новый" aria-label="Новый" aria-describedby="basic-addon2">
+                <label>
+                    <select th:value="${level}" name="level">
+                        <option>high</option>
+                        <option>low</option>
+                    </select>
+                </label>
+                <button class="btn btn-outline-primary btn-sm m-3" type="submit">Добавить</button>
+            </form>
+        </div>
+
+        <div th:each="stack : ${allLevelHigh}">
+            <form th:action="'/editor/' + ${user.id} + '/stack'" th:method="put" class="form-inline"
+                  style="display:inline;">
+                <label style="display:inline;">
+                    <input type="text" th:value="${stack.name}" name="name" class="form-select-button m-3"
+                           aria-describedby="basic-addon2">
+                </label>
+                <button type="submit" th:value="${stack.id}" name="idStack"
+                        class="btn btn-outline-success btn-sm m-1">Редактировать</button>
+            </form>
+            <form th:action="'/editor/' + ${user.id} + '/stack'" th:method="delete" class="mt-1"
+                  style="display:inline;">
+                <button type="submit" th:value="${stack.id}" name="idStack"
+                        class="btn btn-outline-danger btn-sm m-1">Удалить</button>
+            </form>
+        </div>
+        <br>
+        <p>Небольшой опыт</p>
+        <div th:each="stack : ${allLevelLow}">
+            <form th:action="'/editor/' + ${user.id} + '/stack'" th:method="put" class="form-inline"
+                  style="display:inline;">
+                <label style="display:inline;">
+                    <input type="text" th:value="${stack.name}" name="name" class="form-select-button m-3"
+                           aria-describedby="basic-addon2">
+                </label>
+                <button type="submit" th:value="${stack.id}" name="idStack"
+                        class="btn btn-outline-success btn-sm m-1">Редактировать</button>
+            </form>
+            <form th:action="'/editor/' + ${user.id} + '/stack'" th:method="delete" class="mt-1"
+                  style="display:inline;">
+                <button type="submit" th:value="${stack.id}" name="idStack"
+                        class="btn btn-outline-danger btn-sm m-1">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

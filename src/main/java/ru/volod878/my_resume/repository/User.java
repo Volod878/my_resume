@@ -20,6 +20,9 @@ public class User {
     @Column(name = "real_name")
     private String realName;
 
+    @Column(name = "full_text")
+    private String fullText;
+
     public User() {
     }
 
@@ -53,5 +56,13 @@ public class User {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getFullText() {
+        return fullText;
+    }
+
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
     }
 }
