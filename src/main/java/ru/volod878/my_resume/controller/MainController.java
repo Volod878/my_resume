@@ -45,7 +45,7 @@ public class MainController {
     }
 
     @GetMapping("/editor/{id}")
-    public String editResumePage(@PathVariable(value = "id") long id,
+    public String editorResumePage(@PathVariable(value = "id") long id,
                              Model model) {
 
         User user = userRepository.getById(id);
@@ -94,7 +94,7 @@ public class MainController {
     }
 
     @PutMapping("/editor/{id}/stack")
-    public String editResumePage(@PathVariable(value = "id") long id,
+    public String editStackForResumePage(@PathVariable(value = "id") long id,
                                  @RequestParam long idStack,
                                  @RequestParam String name) {
 
@@ -112,7 +112,7 @@ public class MainController {
     }
 
     @DeleteMapping("/editor/{id}/stack")
-    public String deleteStack(@PathVariable(value = "id") long id,
+    public String deleteStackForResumePage(@PathVariable(value = "id") long id,
                               @RequestParam long idStack) {
 
         MyStack stack = repository.getById(idStack);
